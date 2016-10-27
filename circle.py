@@ -7,3 +7,8 @@ class Circle:
             pos = ( randint(0, CONST.window.width), randint(0, CONST.window.height) ) # randomness does not work in parameter
         self.pos = pos
         self.radius = radius
+
+    def __repr__(self):
+        x, y = self.pos
+        r = self.radius
+        return "(x, y, r) = " + str(x) + " " + str(y) + " " + str(r)
