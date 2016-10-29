@@ -1,21 +1,14 @@
-import tkinter as TK
+import tkinter as tk
 import constants as CONST
 import circle, utils
 
-
-class Example(TK.Frame):
+class simulationGUI(tk.Frame):
     def __init__(self, parent):
-        TK.Frame.__init__(self, parent, background = CONST.window.background)
-        self.parent = parent
-        self.canvas = TK.Canvas(self)
-        self.initUI()
+        #tk.Frame.__init__(self, parent)
 
-
-    def initUI(self):
-        self.parent.title(CONST.window.title)
-        self.pack(fill = TK.BOTH, expand = 1)
-
+        self.canvas = tk.Canvas(parent, width = CONST.simulationWindow.width)
         self.placeTheCircles()
+        self.canvas.pack(side = tk.LEFT, fill = tk.BOTH)
 
         # For the interactive gui
         #def callback(event):
@@ -25,12 +18,10 @@ class Example(TK.Frame):
         #self.parent.bind("<Button-1>", callback)
         #self.pack()
 
-
     def addCircle(self, obj):
         x, y = obj.pos
         r = obj.radius
         self.canvas.create_oval(x - r, y - r, x + r, y + r, outline = "red", fill = "green")
-
 
     def placeTheCircles(self):
         placed, idx = [circle.Circle()], 1
@@ -45,12 +36,20 @@ class Example(TK.Frame):
                 self.addCircle(newCircle)
                 placed.append(newCircle)
                 idx += 1
-        self.canvas.pack(fill = TK.BOTH, expand = 1)
 
+class generationTextGUI(tk.Frame):
+    def __init__(self, parent):
+        tk.Frame.__init__(self, parent)
+        generationFrame = tk.Frame(master = parent, bg = "purple", width = CONST.textWindow.width)
+        generationFrame.pack(side = tk.RIGHT, fill = tk.Y)
 
+def resizeWindow(root):
+    root.geometry(str(CONST.mainWindow.width) + "x" + str(CONST.mainWindow.height))
 
 def startGUI():
-    root = TK.Tk()
-    root.geometry(str(CONST.window.width) + "x" + str(CONST.window.height))
-    app = Example(root)
+    root = tk.Tk()
+    resizeWindow(root)
+    root.title(CONST.mainWindow.title)
+    simulationApp = simulationGUI(root)
+    generationTextApp = generationTextGUI(root)
     root.mainloop()
