@@ -1,13 +1,14 @@
 import tkinter as tk
-import constants as CONST
+import constants 
 import circle, utils
 
 class simulationGUI(tk.Frame):
     def __init__(self, parent):
+        const = constants.simulationWindow
 
-        self.canvas = tk.Canvas(parent, width = CONST.simulationWindow.width, height = CONST.simulationWindow.height)
+        self.canvas = tk.Canvas(parent, bg = const.background, width = const.width, height = const.height)
         self.placeTheCircles()
-        self.canvas.grid(row = 0, column = 0, sticky = "nesw")
+        self.canvas.grid(row = const.rowOrder, column = const.colOrder, sticky = "nesw")
 
         # For the interactive gui
         def click(event):
@@ -22,7 +23,7 @@ class simulationGUI(tk.Frame):
 
     def placeTheCircles(self):
         placed, idx = [circle.Circle()], 1
-        while idx < CONST.bubbles.numberOfCircles:
+        while idx < constants.bubbles.numberOfCircles:
             newCircle = circle.Circle()
             isOK = True
             for next in placed:
