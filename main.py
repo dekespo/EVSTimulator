@@ -1,7 +1,9 @@
-import gui as GUI
+import sys
+sys.path.append("./gui")
+import main_gui as gui
 
 def main():
-    GUI.startGUI()
+    obj = gui.GUI()
 
 if __name__ == '__main__':
     main()
