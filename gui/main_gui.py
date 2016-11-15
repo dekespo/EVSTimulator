@@ -1,5 +1,5 @@
 import tkinter as tk
-import constants as CONST
+import constants
 
 from simulation import simulationGUI
 from generationText import generationTextGUI
@@ -8,15 +8,11 @@ from buttons import buttonGUI
 
 class GUI():
     def __init__(self):
+        self.const = constants.mainWindow
         self.root = tk.Tk()
-        self.root.title(CONST.mainWindow.title)
-        self.resizeWindow()
+        self.root.title(self.const.title)
         simulationApp = simulationGUI(self.root)
         generationTextApp = generationTextGUI(self.root)
         plotApp = plotGUI(self.root)
         buttonsApp = buttonGUI(self.root)
         self.root.mainloop()
-
-    def resizeWindow(self):
-        self.root.geometry(str(CONST.mainWindow.width) + "x" + str(CONST.mainWindow.height))
-

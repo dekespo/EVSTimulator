@@ -8,15 +8,24 @@ import numpy as np
 class plotGUI(tk.Frame):
     def __init__(self, parent):
         const = constants.plotWindow
-        canvas = tk.Canvas(parent, bg = const.background, width = const.width, height = const.height)
-        fig = plt.Figure()
+
+        frame = tk.Frame(parent, bg = const.background, width = const.width, height = const.height)
+
+        canvas = tk.Canvas(frame, bg = const.background, width = const.width, height = const.height)
+
+        pixelOverInche = 80 # Not sure if it is safe enough ie. valid for all screens?
+        fig = plt.Figure(figsize = (frame.winfo_reqwidth() / pixelOverInche, frame.winfo_reqheight() / pixelOverInche) )
+
         plotCanvas = FigureCanvasTkAgg(fig, master = canvas)
-        #toolbar = NavigationToolbar2TkAgg(plotCanvas, canvas) # weird error, assumes canvas is pack?
-        plotCanvas.get_tk_widget().grid(row = 0, column = 0)
-        #toolbar.grid(row = 1, column = 0)
-        canvas.grid(row = const.rowOrder, column = const.colOrder)
+        toolbar = NavigationToolbar2TkAgg(plotCanvas, canvas) 
+        toolbar.update()
+        plotCanvas._tkcanvas.pack()
 
         x = np.arange(0, 2 * np.pi, 0.01)
-        ax = fig.add_subplot(111)
+        ax = fig.add_subplot(211)
         line, = ax.plot(x, np.sin(x))
+        ax = fig.add_subplot(212)
+        line, = ax.plot(x, np.cos(x))
 
+        canvas.grid()
+        frame.grid(row = const.rowOrder, column = const.colOrder, sticky = const.sticky)

@@ -7,8 +7,9 @@ class simulationGUI(tk.Frame):
         const = constants.simulationWindow
 
         self.canvas = tk.Canvas(parent, bg = const.background, width = const.width, height = const.height)
+        self.canvasSizes = (self.canvas.winfo_reqwidth(), self.canvas.winfo_reqheight())
         self.placeTheCircles()
-        self.canvas.grid(row = const.rowOrder, column = const.colOrder, sticky = "nesw")
+        self.canvas.grid(row = const.rowOrder, column = const.colOrder, sticky = const.sticky)
 
         # For the interactive gui
         def click(event):
@@ -22,9 +23,9 @@ class simulationGUI(tk.Frame):
         self.canvas.create_oval(x - r, y - r, x + r, y + r, outline = "red", fill = "green")
 
     def placeTheCircles(self):
-        placed, idx = [circle.Circle()], 1
+        placed, idx = [circle.Circle(self.canvasSizes)], 1
         while idx < constants.bubbles.numberOfCircles:
-            newCircle = circle.Circle()
+            newCircle = circle.Circle(self.canvasSizes)
             isOK = True
             for next in placed:
                 if utils.circlesIsOverlapCheck(next, newCircle):
