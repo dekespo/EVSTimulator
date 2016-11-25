@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-python3 unit_test.py
+python3.5 unit_test.py
