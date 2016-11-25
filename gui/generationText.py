@@ -1,15 +1,20 @@
 import tkinter as tk
-import constants 
+import constants
+
 
 class generationTextGUI(tk.Frame):
-    def __init__(self, parent):
+    def __init__(self, parent, beObj):
         const = constants.textWindow
+        self.beObj = beObj
 
-        generationFrame = tk.Frame(master = parent, bg = const.background, width = const.width, height = const.height)
-        generationFrame.grid(row = const.rowOrder, column = const.colOrder, sticky = const.sticky)
+        generationFrame = tk.Frame(master=parent, bg=const.background,
+                                   width=const.width, height=const.height)
+        generationFrame.grid(row=const.rowOrder, column=const.colOrder,
+                             sticky=const.sticky)
 
         clickNo = 0
-        label = tk.Label(generationFrame, text = "Click here\n. The number is #%s" % clickNo)
+        label = tk.Label(generationFrame,
+                         text="Click here\n. The number is #%s" % clickNo)
         label.pack()
         self.label = label
         self.clickNo = clickNo
@@ -18,5 +23,7 @@ class generationTextGUI(tk.Frame):
 
     def click(self, event):
         self.clickNo += 1
-        self.label["text"] = "Click here\n. The number is %s" % self.clickNo
-
+        self.label["text"] = "Click here\n. " \
+                             "The number is %s" % self.clickNo
+        self.beObj.increment()
+        print(self.beObj)

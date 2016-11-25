@@ -1,23 +1,31 @@
 import tkinter as tk
-import constants 
+import constants
 
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2TkAgg
+from matplotlib.backends.backend_tkagg import (
+    FigureCanvasTkAgg,
+    NavigationToolbar2TkAgg
+)
 import matplotlib.pyplot as plt
 import numpy as np
+
 
 class plotGUI(tk.Frame):
     def __init__(self, parent):
         const = constants.plotWindow
 
-        frame = tk.Frame(parent, bg = const.background, width = const.width, height = const.height)
+        frame = tk.Frame(parent, bg=const.background,
+                         width=const.width, height=const.height)
 
-        canvas = tk.Canvas(frame, bg = const.background, width = const.width, height = const.height)
+        canvas = tk.Canvas(frame, bg=const.background,
+                           width=const.width, height=const.height)
 
-        pixelOverInche = 80 # Not sure if it is safe enough ie. valid for all screens?
-        fig = plt.Figure(figsize = (frame.winfo_reqwidth() / pixelOverInche, frame.winfo_reqheight() / pixelOverInche) )
+        # Not sure if it is safe enough ie. valid for all screens?
+        pixelOverInche = 80
+        fig = plt.Figure(figsize=(frame.winfo_reqwidth() / pixelOverInche,
+                                  frame.winfo_reqheight() / pixelOverInche))
 
-        plotCanvas = FigureCanvasTkAgg(fig, master = canvas)
-        toolbar = NavigationToolbar2TkAgg(plotCanvas, canvas) 
+        plotCanvas = FigureCanvasTkAgg(fig, master=canvas)
+        toolbar = NavigationToolbar2TkAgg(plotCanvas, canvas)
         toolbar.update()
         plotCanvas._tkcanvas.pack()
 
@@ -28,4 +36,5 @@ class plotGUI(tk.Frame):
         line, = ax.plot(x, np.cos(x))
 
         canvas.grid()
-        frame.grid(row = const.rowOrder, column = const.colOrder, sticky = const.sticky)
+        frame.grid(row=const.rowOrder, column=const.colOrder,
+                   sticky=const.sticky)
