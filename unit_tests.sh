@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-echo "Hello world!"
+python3 unit_test.py
