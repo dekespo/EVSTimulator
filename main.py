@@ -1,5 +1,4 @@
 import sys
-import os
 sys.path.append("./gui")
 import main_gui as gui  # noqa
 sys.path.append("./evolution_algorithms")
