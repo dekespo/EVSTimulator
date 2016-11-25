@@ -25,6 +25,7 @@ class plotGUI(tk.Frame):
                                   frame.winfo_reqheight() / pixelOverInche))
 
         plotCanvas = FigureCanvasTkAgg(fig, master=canvas)
+        # We might need to make the toolbar smaller in future
         toolbar = NavigationToolbar2TkAgg(plotCanvas, canvas)
         toolbar.update()
         plotCanvas._tkcanvas.pack()
