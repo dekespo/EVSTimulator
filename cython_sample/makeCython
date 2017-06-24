@@ -1,0 +1,2 @@
+rm -r build dynamic_libraries/*.so cython_files/montecarlo.cpp
+python3 setup.py build_ext -b dynamic_libraries

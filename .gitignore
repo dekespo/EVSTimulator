@@ -1,6 +1,14 @@
 # Python
 *.pyc
 
+# C++
+*.o
+*.so
+
 # VIM Editor
 *.swp
 *~
+
+# Unnecessary Files
+cython_sample/pxdList
+cython_sample/cython_files/*.cpp
